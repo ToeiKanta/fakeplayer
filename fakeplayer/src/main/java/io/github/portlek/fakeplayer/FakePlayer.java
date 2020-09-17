@@ -3,6 +3,9 @@ package io.github.portlek.fakeplayer;
 import co.aikar.commands.BukkitCommandManager;
 import io.github.portlek.fakeplayer.commands.FakePlayerCommand;
 import java.util.Optional;
+
+import io.github.portlek.fakeplayer.util.Placeholder;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +41,9 @@ public final class FakePlayer extends JavaPlugin {
     @Override
     public void onDisable() {
         Optional.ofNullable(FakePlayer.api).ifPresent(FakePlayerAPI::disablePlugin);
+        FakePlayer.getAPI().fakesFile.fakeplayers.values().forEach(fake ->
+                FakePlayer.getAPI().fakesFile.remove(fake.getName())
+        );
     }
 
     @Override
