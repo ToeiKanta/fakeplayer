@@ -10,6 +10,7 @@ import io.github.portlek.configs.util.MapEntry;
 import io.github.portlek.fakeplayer.FakePlayer;
 import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -83,7 +84,18 @@ public final class FakePlayerCommand extends BaseCommand {
             FakePlayer.getAPI().fakesFile.remove(realname.trim());
             return ;
         }
+
         sender.sendMessage(realname + " toggle add fake player success");
         FakePlayer.getAPI().fakesFile.addFakes(realname.trim(), new Location(Bukkit.getWorld("world"),0,0,0));
+    }
+
+    @Syntax("<realname> <message>")
+    @Subcommand("chat")
+    @CommandPermission("fakeplayer.command.chat")
+    public static void chatCommand(final CommandSender sender,String realname, String msg) {
+        if (FakePlayer.getAPI().fakesFile.fakeplayers.containsKey(realname)) {
+            Bukkit.getOnlinePlayers().forEach(player ->
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',"[home_world]<&d[ชาวบ้าน] "+realname + "&f> " + msg)));
+        }
     }
 }
