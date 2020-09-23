@@ -3,8 +3,10 @@ name: ${project.name}
 version: ${project.version}
 description: ${project.description}
 api-version: '1.13'
+softdepend: [TAB]
 authors:
   - portlek
+  - ToeiKanta
 commands:
   fakeplayer:
     description: Main command of the plugin.
