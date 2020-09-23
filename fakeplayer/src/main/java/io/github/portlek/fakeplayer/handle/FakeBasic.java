@@ -75,10 +75,32 @@ public final class FakeBasic implements Fake {
     public void spawn() {
         Optional.ofNullable(this.spawnpoint.getWorld()).ifPresent(world -> {
             if (!Optional.ofNullable(this.npc).isPresent()) {
+                String tabName = "";
+                switch ((int) (Math.random() * (4 - 1 + 1) + 1)){
+                    case 1:
+                        tabName = FakePlayer.getAPI().configFile.tab_name_1
+                                .build(MapEntry.from("%player_name%", this::getName));
+                                break;
+                    case 2:
+                        tabName = FakePlayer.getAPI().configFile.tab_name_2
+                                .build(MapEntry.from("%player_name%", this::getName));
+                        break;
+                    case 3:
+                        tabName = FakePlayer.getAPI().configFile.tab_name_3
+                                .build(MapEntry.from("%player_name%", this::getName));
+                        break;
+                    case 4:
+                        tabName = FakePlayer.getAPI().configFile.tab_name_4
+                                .build(MapEntry.from("%player_name%", this::getName));
+                        break;
+                    default:
+                        tabName = FakePlayer.getAPI().configFile.tab_name_default
+                                .build(MapEntry.from("%player_name%", this::getName));
+                        break;
+                }
                 this.npc = FakeBasic.FAKE_CREATED.create(
                     this.name,
-                    FakePlayer.getAPI().configFile.tab_name
-                        .build(MapEntry.from("%player_name%", this::getName)),
+                    tabName,
                     world);
             }
             this.npc.spawn(this.spawnpoint);

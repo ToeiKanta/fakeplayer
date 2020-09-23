@@ -24,9 +24,29 @@ public final class ConfigFile extends BukkitManaged {
     public boolean check_for_update = true;
 
     @Property
-    public ReplaceableString tab_name = Replaceable.from("&e[Player] &a%player_name%")
+    public ReplaceableString tab_name_default = Replaceable.from("&e[Player] &a%player_name%")
+            .map(ColorUtil::colored)
+            .replaces("%player_name%");
+
+    @Property
+    public ReplaceableString tab_name_1 = Replaceable.from("&e[Player] &a%player_name%")
         .map(ColorUtil::colored)
         .replaces("%player_name%");
+
+    @Property
+    public ReplaceableString tab_name_2 = Replaceable.from("&e[Player] &a%player_name%")
+            .map(ColorUtil::colored)
+            .replaces("%player_name%");
+
+    @Property
+    public ReplaceableString tab_name_3 = Replaceable.from("&e[Player] &a%player_name%")
+            .map(ColorUtil::colored)
+            .replaces("%player_name%");
+
+    @Property
+    public ReplaceableString tab_name_4 = Replaceable.from("&e[Player] &a%player_name%")
+            .map(ColorUtil::colored)
+            .replaces("%player_name%");
 
     @Override
     public void onLoad() {
